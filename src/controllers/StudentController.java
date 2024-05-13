@@ -1,4 +1,4 @@
-package controller;
+package controllers;
 
 import services.StudentService;
 import view.View;
