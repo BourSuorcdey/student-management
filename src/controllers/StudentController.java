@@ -35,7 +35,7 @@ public class StudentController {
                     System.out.println("5. Update students by ID");
                     break;
                 case "6":
-                    System.out.println("6. Delete student's data ");
+                    StudentService.deleteData();
                     break;
                 case "7":
                     System.out.println("7. Generate data into file");

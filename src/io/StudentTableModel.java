@@ -24,7 +24,7 @@ public class StudentTableModel {
         // date rows
         for (int i = 0; i < Math.min(studentsList.size(), rows); i++) {
             Student student = studentsList.get(i);
-            table.addCell(String.valueOf(student.getId()));
+            table.addCell(student.getId());
             table.addCell(student.getName());
             table.addCell(student.getDateOfBirth());
             table.addCell(student.getClassroom());

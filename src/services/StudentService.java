@@ -34,7 +34,7 @@ public class StudentService {
         String subject = sc.nextLine();
 
         Student student = new Student();
-        student.setId(random.nextInt(10000));
+        student.setId(String.valueOf(random.nextInt(10000)));
         student.setName(name);
         student.setDateOfBirth(LocalDate.of(year, month, day).toString());
         student.setClassroom(classroom);
@@ -143,7 +143,7 @@ public class StudentService {
                     found = true;
                 }
                 // date rows
-                table.addCell(String.valueOf(student.getId()));
+                table.addCell(student.getId());
                 table.addCell(student.getName());
                 table.addCell(student.getDateOfBirth());
                 table.addCell(student.getClassroom());
@@ -151,6 +151,9 @@ public class StudentService {
             }
         }
         System.out.println(table.render());
+        if (!found) {
+            System.out.println("Student's name: " + name + " was not found!");
+        }
     }
     public static void searchById() {
         System.out.print("Enter Id: ");
@@ -168,12 +171,12 @@ public class StudentService {
         table.addCell("Subject");
 
         for (Student student : students) {
-            if (String.valueOf(student.getId()).equals(id)) {
+            if (student.getId().equals(id)) {
                 if(!found) {
                     found = true;
                 }
                 // date rows
-                table.addCell(String.valueOf(student.getId()));
+                table.addCell(student.getId());
                 table.addCell(student.getName());
                 table.addCell(student.getDateOfBirth());
                 table.addCell(student.getClassroom());
@@ -181,6 +184,9 @@ public class StudentService {
             }
         }
         System.out.println(table.render());
+        if (!found) {
+            System.out.println("Student's name: " + id + " was not found!");
+        }
     }
 
     public static void updateDataById() {
@@ -188,7 +194,25 @@ public class StudentService {
     }
 
     public static void deleteData() {
+        System.out.println(".........................");
+        System.out.println("[*] Delete student's by Id: ");
+        System.out.print("Insert student's Id: ");
+        String id = sc.nextLine();
 
+        Student student = StudentIO.get(id);
+        String choice = "";
+        if (student == null) {
+            System.out.println("Error!, Unable to get student.");
+        } else {
+            System.out.print("Are you sure want to delete?(Y/N): ");
+            choice = new Scanner(System.in).nextLine();
+            if (choice.equalsIgnoreCase("y")) {
+                StudentIO.delete(student);
+                System.out.println("Student's name " + student.getName() + " was deleted.");
+            } else {
+                System.out.println("Delete was cancel.");
+            }
+        }
     }
 
     public static void generateDataIntoFile() {

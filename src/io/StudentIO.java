@@ -36,7 +36,7 @@ public class StudentIO {
                     String subject = columns[4];
 
                     Student s = new Student();
-                    s.setId((Integer.parseInt(id)));
+                    s.setId(id);
                     s.setName(name);
                     s.setDateOfBirth(dob);
                     s.setClassroom(classroom);
@@ -52,6 +52,18 @@ public class StudentIO {
             }
         }
         return students;
+    }
+    public static Student get(String id) {
+        students = getAll();
+        if (students == null) {
+            System.out.println("Error!. Unable to get student.");
+        }
+        for (Student s : students) {
+            if (s.getId().equals(id)) {
+                return s;
+            }
+        }
+        return null;
     }
 
     public static boolean saveAll() {
@@ -72,6 +84,11 @@ public class StudentIO {
     }
     public static boolean add(Student std) {
         students.add(std);
+        return saveAll();
+    }
+    public static boolean delete(Student s) {
+        students = getAll();
+        students.remove(s);
         return saveAll();
     }
 }
