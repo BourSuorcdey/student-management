@@ -29,7 +29,7 @@ public class StudentController {
                     System.out.println("3. Commit data to file");
                     break;
                 case "4":
-                    System.out.println("4. Search for student");
+                    StudentService.searchForData();
                     break;
                 case "5":
                     System.out.println("5. Update students by ID");

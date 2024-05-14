@@ -3,6 +3,9 @@ package services;
 import io.StudentIO;
 import io.StudentTableModel;
 import model.Student;
+import org.nocrala.tools.texttablefmt.BorderStyle;
+import org.nocrala.tools.texttablefmt.ShownBorders;
+import org.nocrala.tools.texttablefmt.Table;
 
 import java.time.LocalDate;
 import java.util.List;
@@ -98,7 +101,86 @@ public class StudentService {
     }
 
     public static void searchForData() {
+        System.out.println(".........................");
+        System.out.println("[+] Searching Student:");
+        System.out.println(".........................");
+        System.out.println("1. Search by Name");
+        System.out.println("2. Search by Id");
+        System.out.println("(Back/B) To Back");
+        System.out.println(".........................");
+        while (true) {
+            System.out.print("> Insert option(search): ");
+            String option = sc.nextLine();
+            if (option.equals("1")) {
+                searchByName();
+            } else if (option.equals("2") ){
+                searchById();
+            } else if (option.equalsIgnoreCase("b") || option.equalsIgnoreCase("back")){
+                return;
+            } else {
+                System.out.println("Invalid input!");
+            }
+        }
+    }
+    public static void searchByName() {
+        System.out.print("Enter Name: ");
+        String name = sc.nextLine();
+        boolean found = false;
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_HEAVY_BORDER, ShownBorders.ALL);
+        for (int i = 0; i < 5; i++) {
+            table.setColumnWidth(i, 20, 20);
+        }
+        // header table
+        table.addCell("Id");
+        table.addCell("Student Name");
+        table.addCell("Date Of Birth");
+        table.addCell("Classroom");
+        table.addCell("Subject");
 
+        for (Student student : students) {
+            if (student.getName().equalsIgnoreCase(name)) {
+                if(!found) {
+                    found = true;
+                }
+                // date rows
+                table.addCell(String.valueOf(student.getId()));
+                table.addCell(student.getName());
+                table.addCell(student.getDateOfBirth());
+                table.addCell(student.getClassroom());
+                table.addCell(student.getSubject());
+            }
+        }
+        System.out.println(table.render());
+    }
+    public static void searchById() {
+        System.out.print("Enter Id: ");
+        String id = sc.nextLine();
+        boolean found = false;
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_HEAVY_BORDER, ShownBorders.ALL);
+        for (int i = 0; i < 5; i++) {
+            table.setColumnWidth(i, 20, 20);
+        }
+        // header table
+        table.addCell("Id");
+        table.addCell("Student Name");
+        table.addCell("Date Of Birth");
+        table.addCell("Classroom");
+        table.addCell("Subject");
+
+        for (Student student : students) {
+            if (String.valueOf(student.getId()).equals(id)) {
+                if(!found) {
+                    found = true;
+                }
+                // date rows
+                table.addCell(String.valueOf(student.getId()));
+                table.addCell(student.getName());
+                table.addCell(student.getDateOfBirth());
+                table.addCell(student.getClassroom());
+                table.addCell(student.getSubject());
+            }
+        }
+        System.out.println(table.render());
     }
 
     public static void updateDataById() {
