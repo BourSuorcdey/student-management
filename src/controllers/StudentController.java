@@ -1,15 +1,16 @@
 package controllers;
 
+import model.Student;
 import services.StudentService;
 import view.View;
-
 import java.util.Scanner;
 
 public class StudentController {
 
-    public static void display() {
+    public static void display(String transaction, String dataSource) {
         Scanner sc = new Scanner(System.in);
 
+        System.out.println();
         System.out.println("=================================================");
         System.out.println("\t\t\tSTUDENT MANAGEMENT SYSTEM");
         View.menu();
@@ -26,7 +27,7 @@ public class StudentController {
                     StudentService.getAllData();
                     break;
                 case "3":
-                    System.out.println("3. Commit data to file");
+                    StudentService.commitDataToFile(transaction, dataSource);
                     break;
                 case "4":
                     System.out.println("4. Search for student");
@@ -38,7 +39,7 @@ public class StudentController {
                     System.out.println("6. Delete student's data ");
                     break;
                 case "7":
-                    System.out.println("7. Generate data into file");
+                    System.out.println("7. Generate");
                     break;
                 case "8":
                     System.out.println("8. Delete/Clear all data from Data store");

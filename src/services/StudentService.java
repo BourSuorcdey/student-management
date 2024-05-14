@@ -2,6 +2,7 @@ package services;
 
 import io.StudentIO;
 import io.StudentTableModel;
+import io.Utils;
 import model.Student;
 
 import java.time.LocalDate;
@@ -31,7 +32,7 @@ public class StudentService {
         String subject = sc.nextLine();
 
         Student student = new Student();
-        student.setId(random.nextInt(10000));
+        student.setId(random.nextInt(100000));
         student.setName(name);
         student.setDateOfBirth(LocalDate.of(year, month, day).toString());
         student.setClassroom(classroom);
@@ -93,8 +94,9 @@ public class StudentService {
         }
     }
 
-    public static void commitDataToFile() {
-
+    public static void commitDataToFile(String originalFile, String destinationFile) {
+        Utils.exchangeData(originalFile, destinationFile);
+        Utils.clearTransactionFile(originalFile, "");
     }
 
     public static void searchForData() {

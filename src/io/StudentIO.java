@@ -10,9 +10,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class StudentIO {
-    private static final Path studentsPath = Paths.get("src/data/students-data.dat");
+    private static final Path studentsPath = Paths.get("src/data/transaction.dat");
     private static final File studentsFile = studentsPath.toFile();
-    private static List<Student> students = getAll();
+    static List<Student> students = getAll();
 
     private StudentIO() {
     }
@@ -24,7 +24,7 @@ public class StudentIO {
         students = new ArrayList<>();
         if (Files.exists(studentsPath)) {
             try (BufferedReader in = new BufferedReader(
-                    new FileReader(studentsFile)
+                    new FileReader("src/data/students-data.dat")
             )) {
                 String line = in.readLine();
                 while(line != null) {
