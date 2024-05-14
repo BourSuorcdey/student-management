@@ -20,10 +20,10 @@ public class StudentController {
 
             switch (option) {
                 case "1":
-                    StudentService.addStudent();
+                    StudentService.addNewData();
                     break;
                 case "2":
-                    StudentService.listAllStudent();
+                    StudentService.getAllData();
                     break;
                 case "3":
                     System.out.println("3. Commit data to file");
@@ -52,4 +52,5 @@ public class StudentController {
             }
         }
     }
+
 }
