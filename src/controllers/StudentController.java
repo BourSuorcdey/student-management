@@ -39,10 +39,10 @@ public class StudentController {
                     System.out.println("6. Delete student's data ");
                     break;
                 case "7":
-                    System.out.println("7. Generate");
+                    StudentService.generateDataIntoFile(transaction);
                     break;
                 case "8":
-                    System.out.println("8. Delete/Clear all data from Data store");
+                    StudentService.deleteAllDataFromFile(dataSource);
                     break;
                 case "9":
                     System.out.println("9. Exit");

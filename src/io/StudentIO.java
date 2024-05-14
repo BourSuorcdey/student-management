@@ -17,12 +17,14 @@ public class StudentIO {
     private StudentIO() {
     }
     public static List<Student> getAll() {
+
         if (students != null) {
             return students;
         }
 
         students = new ArrayList<>();
         if (Files.exists(studentsPath)) {
+            students.clear(); // Clear the existing list to avoid duplicates
             try (BufferedReader in = new BufferedReader(
                     new FileReader("src/data/students-data.dat")
             )) {

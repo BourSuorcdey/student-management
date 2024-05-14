@@ -24,7 +24,6 @@ public class Main {
         // reading data from file into list
         students = Utils.readFileToList(dataSource);
         listToFile(students, transaction);
-        System.out.println("Student size: " + students.size());
 
         // read data from data source into transaction file
         boolean running = true;

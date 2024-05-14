@@ -5,14 +5,19 @@ import io.StudentTableModel;
 import io.Utils;
 import model.Student;
 
+import java.io.IOException;
+import java.io.PrintWriter;
 import java.time.LocalDate;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
+import static io.Utils.generateMockStudents;
+import static io.Utils.listToFile;
+
 public class StudentService {
     static Scanner sc = new Scanner(System.in);
-    static Random random = new Random();
+    public static Random random = new Random();
     static List<Student> students = StudentIO.getAll();
     private static final int rowSize = 4;
     public static void addNewData() {
@@ -111,11 +116,22 @@ public class StudentService {
 
     }
 
-    public static void generateDataIntoFile() {
-
+    public static void generateDataIntoFile(String filePath) {
+        System.out.print("Enter number of students:  ");
+        int studentsCount = new Scanner(System.in).nextInt();
+        List<Student> students = generateMockStudents(studentsCount);
+        listToFile(students, filePath);
     }
 
-    public static void deleteAllDataFromFile() {
+
+    public static void deleteAllDataFromFile(String dataSource) {
+
+        try (PrintWriter writer = new PrintWriter(dataSource)) {
+            // Write an empty string to the file
+            writer.print("");
+        } catch (IOException e) {
+            System.err.println("Error clearing file: " + e.getMessage());
+        }
 
     }
 }
