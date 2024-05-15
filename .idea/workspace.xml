@@ -4,14 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="3b7bff83-7fee-494c-a0c4-8d5cf8978822" name="Changes" comment="generate and update resolve commit">
+    <list default="true" id="3b7bff83-7fee-494c-a0c4-8d5cf8978822" name="Changes" comment="update feature">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/controllers/StudentController.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/controllers/StudentController.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/data/students-data.dat" beforeDir="false" afterPath="$PROJECT_DIR$/src/data/students-data.dat" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/StudentIO.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/StudentIO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/io/StudentTableModel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/io/StudentTableModel.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/model/Student.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/model/Student.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/services/StudentService.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/services/StudentService.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -83,7 +77,7 @@
       <workItem from="1715713857693" duration="973000" />
       <workItem from="1715714853173" duration="37000" />
       <workItem from="1715752219271" duration="1745000" />
-      <workItem from="1715754149490" duration="2660000" />
+      <workItem from="1715754149490" duration="3596000" />
     </task>
     <servers />
   </component>
@@ -103,6 +97,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="generate and update resolve commit" />
-    <option name="LAST_COMMIT_MESSAGE" value="generate and update resolve commit" />
+    <MESSAGE value="update feature" />
+    <option name="LAST_COMMIT_MESSAGE" value="update feature" />
   </component>
 </project>
