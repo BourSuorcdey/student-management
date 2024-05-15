@@ -190,7 +190,78 @@ public class StudentService {
     }
 
     public static void updateDataById() {
+        System.out.println(".........................");
+        System.out.println("[+] Updating student's information:");
+        System.out.print("Insert student's Id: ");
+        String id = sc.nextLine();
 
+        Student student = StudentIO.get(id);
+
+        if (student == null) {
+            System.out.println("Student " + id + " was not found.");
+        }
+        Table table = new Table(5, BorderStyle.UNICODE_BOX_HEAVY_BORDER, ShownBorders.ALL);
+        for (int i = 0; i < 5; i++) {
+            table.setColumnWidth(i, 20, 20);
+        }
+        // header table
+        table.addCell("Id");
+        table.addCell("Student Name");
+        table.addCell("Date Of Birth");
+        table.addCell("Classroom");
+        table.addCell("Subject");
+
+        for (Student s : students) {
+            if (s.getId().equals(id)) {
+                System.out.println("---------------------------------------");
+                System.out.println("[*] Update student's information");
+                System.out.println("---------------------------------------");
+                System.out.println("1. Update student's name");
+                System.out.println("2. Update student's date of birth");
+                System.out.println("3. Update student's classroom");
+                System.out.println("4. Update student's subject");
+                System.out.println(">>Input b to Back to menu");
+                System.out.println("---------------------------------------");
+                System.out.print("Enter the option(edit): ");
+                String option = sc.nextLine();
+                try {
+                    switch (option) {
+                        case "1" -> {
+                            System.out.print("[+] Insert new student's name: ");
+                            String name = sc.nextLine();
+                            s.setName(name);
+                            StudentIO.saveAll();
+                        }
+                        case "2" -> {
+                            System.out.print("[+] Insert new student's dob(yyyy-mm-dd): ");
+                            String dob = sc.nextLine();
+                            s.setDateOfBirth(dob);
+                            StudentIO.saveAll();
+                        }
+                        case "3" -> {
+                            System.out.print("[+] Insert new student's classroom: ");
+                            String classroom = sc.nextLine();
+                            s.setClassroom(classroom);
+                            StudentIO.saveAll();
+                        }
+                        case "4" -> {
+                            System.out.print("[+] Insert new student's subject: ");
+                            String subject = sc.nextLine();
+                            s.setSubject(subject);
+                            StudentIO.saveAll();
+                        }
+                        case "b" -> {
+                            return;
+                        }
+                        default -> System.out.println("Invalid input!");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Error! found!");
+                }
+
+            }
+        }
     }
 
     public static void deleteData() {

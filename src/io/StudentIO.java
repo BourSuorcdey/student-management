@@ -86,6 +86,17 @@ public class StudentIO {
         students.add(std);
         return saveAll();
     }
+    public static boolean update(Student newStudent) {
+        students = getAll();
+
+        Student oldStudent = get(newStudent.getId());
+        int i = students.indexOf(oldStudent);
+        students.remove(i);
+
+        students.add(i, newStudent);
+
+        return saveAll();
+    }
     public static boolean delete(Student s) {
         students = getAll();
         students.remove(s);

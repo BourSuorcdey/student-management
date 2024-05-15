@@ -32,7 +32,7 @@ public class StudentController {
                     StudentService.searchForData();
                     break;
                 case "5":
-                    System.out.println("5. Update students by ID");
+                    StudentService.updateDataById();
                     break;
                 case "6":
                     StudentService.deleteData();
