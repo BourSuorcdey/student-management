@@ -1,7 +1,7 @@
 package model;
 
 public class Student {
-    private Integer id;
+    private String id;
     private String name;
     private String dateOfBirth;
     private String classroom;
@@ -10,7 +10,7 @@ public class Student {
     public Student() {
     }
 
-    public Student(Integer id, String name, String dateOfBirth, String classroom, String subject) {
+    public Student(String id, String name, String dateOfBirth, String classroom, String subject) {
         this.id = id;
         this.name = name;
         this.dateOfBirth = dateOfBirth;
@@ -18,11 +18,11 @@ public class Student {
         this.subject = subject;
     }
 
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 

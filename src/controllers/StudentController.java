@@ -13,9 +13,10 @@ public class StudentController {
         System.out.println();
         System.out.println("=================================================");
         System.out.println("\t\t\tSTUDENT MANAGEMENT SYSTEM");
-        View.menu();
+
         String option = "";
         while (!option.equalsIgnoreCase("0")) {
+            View.menu();
             System.out.print("> Insert option: ");
             option = sc.nextLine();
 
@@ -30,13 +31,13 @@ public class StudentController {
                     StudentService.commitDataToFile(transaction, dataSource);
                     break;
                 case "4":
-                    System.out.println("4. Search for student");
+                    StudentService.searchForData();
                     break;
                 case "5":
-                    System.out.println("5. Update students by ID");
+                    StudentService.updateDataById();
                     break;
                 case "6":
-                    System.out.println("6. Delete student's data ");
+                    StudentService.deleteData();
                     break;
                 case "7":
                     StudentService.generateDataIntoFile(transaction);

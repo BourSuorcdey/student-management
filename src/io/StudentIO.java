@@ -26,7 +26,7 @@ public class StudentIO {
         if (Files.exists(studentsPath)) {
             students.clear(); // Clear the existing list to avoid duplicates
             try (BufferedReader in = new BufferedReader(
-                    new FileReader("src/data/students-data.dat")
+                    new FileReader("src/data/transaction.dat")
             )) {
                 String line = in.readLine();
                 while(line != null) {
@@ -38,7 +38,7 @@ public class StudentIO {
                     String subject = columns[4];
 
                     Student s = new Student();
-                    s.setId((Integer.parseInt(id)));
+                    s.setId(id);
                     s.setName(name);
                     s.setDateOfBirth(dob);
                     s.setClassroom(classroom);
@@ -74,6 +74,25 @@ public class StudentIO {
     }
     public static boolean add(Student std) {
         students.add(std);
+        return saveAll();
+    }
+
+    public static Student get(String id) {
+        students = getAll();
+        if (students == null) {
+            System.out.println("Error!. Unable to get student.");
+        }
+        for (Student s : students) {
+            if (s.getId().equals(id)) {
+                return s;
+            }
+        }
+        return null;
+    }
+
+    public static boolean delete(Student s) {
+        students = getAll();
+        students.remove(s);
         return saveAll();
     }
 }
