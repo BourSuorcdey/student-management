@@ -1,0 +1,22 @@
+Index: src/Main.java
+IDEA additional info:
+Subsystem: com.intellij.openapi.diff.impl.patch.BaseRevisionTextPatchEP
+<+>import controller.StudentController;\r\n\r\n// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,\r\n// then press Enter. You can now see whitespace characters in your code.\r\npublic class Main {\r\n    public static void main(String[] args) {\r\n        StudentController.display();\r\n    }\r\n}
+Subsystem: com.intellij.openapi.diff.impl.patch.CharsetEP
+<+>UTF-8
+===================================================================
+diff --git a/src/Main.java b/src/Main.java
+--- a/src/Main.java	
++++ b/src/Main.java	
+@@ -1,9 +1,8 @@
+ import controller.StudentController;
+ 
+-// Press Shift twice to open the Search Everywhere dialog and type `show whitespaces`,
+-// then press Enter. You can now see whitespace characters in your code.
+ public class Main {
+     public static void main(String[] args) {
++
+         StudentController.display();
+     }
+ }
+\ No newline at end of file
