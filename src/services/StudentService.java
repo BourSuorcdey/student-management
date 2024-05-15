@@ -138,29 +138,48 @@ public class StudentService {
                 System.out.println("2. Update student's date of birth");
                 System.out.println("3. Update student's classroom");
                 System.out.println("4. Update student's subject");
+                System.out.println(">>>[B] Back to Menu");
                 System.out.println("---------------------------------------");
                 System.out.print("Enter the option(edit): ");
                 String option = sc.nextLine();
-                if (option.equals("1")) {
-                    System.out.print("[+] Insert new student's name: ");
-                    String name = sc.nextLine();
-                    s.setName(name);
-                } else if (option.equals("2")) {
-                    System.out.print("[+] Insert new student's dob(yyyy-mm-dd): ");
-                    String dob = sc.nextLine();
-                    s.setDateOfBirth(dob);
-                } else if (option.equals("3")) {
-                    System.out.print("[+] Insert new student's classroom: ");
-                    String classroom = sc.nextLine();
-                    s.setClassroom(classroom);
-                } else if (option.equals("4")) {
-                    System.out.print("[+] Insert new student's subject: ");
-                    String subject = sc.nextLine();
-                    s.setSubject(subject);
-                } else if (option.equalsIgnoreCase("b")) {
-                    return;
-                } else {
-                    System.out.println("Invalid input!");
+                try {
+                    switch (option) {
+                        case "1" -> {
+                            System.out.print("[+] Insert new student's name: ");
+                            String name = sc.nextLine();
+                            s.setName(name);
+                            StudentIO.saveAll();
+                            break;
+                        }
+                        case "2" -> {
+                            System.out.print("[+] Insert new student's dob(yyyy-mm-dd): ");
+                            String dob = sc.nextLine();
+                            s.setDateOfBirth(dob);
+                            StudentIO.saveAll();
+                            break;
+                        }
+                        case "3" -> {
+                            System.out.print("[+] Insert new student's classroom: ");
+                            String classroom = sc.nextLine();
+                            s.setClassroom(classroom);
+                            StudentIO.saveAll();
+                            break;
+                        }
+                        case "4" -> {
+                            System.out.print("[+] Insert new student's subject: ");
+                            String subject = sc.nextLine();
+                            s.setSubject(subject);
+                            StudentIO.saveAll();
+                            break;
+                        }
+                        case "b" -> {
+                            return;
+                        }
+                        default -> System.out.println("Invalid input!");
+                    }
+
+                } catch (Exception e) {
+                    System.out.println("Error! found!");
                 }
             }
         }
