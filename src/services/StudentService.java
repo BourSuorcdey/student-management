@@ -8,6 +8,7 @@ import org.nocrala.tools.texttablefmt.ShownBorders;
 import org.nocrala.tools.texttablefmt.Table;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
@@ -16,6 +17,7 @@ public class StudentService {
     static Scanner sc = new Scanner(System.in);
     static Random random = new Random();
     static List<Student> students = StudentIO.getAll();
+    private static int currentPage = 1;
     private static final int rowSize = 4;
     public static void addNewData() {
         System.out.println(".........................");
@@ -123,69 +125,131 @@ public class StudentService {
         }
     }
     public static void searchByName() {
-        System.out.print("Enter Name: ");
-        String name = sc.nextLine();
         boolean found = false;
-        Table table = new Table(5, BorderStyle.UNICODE_BOX_HEAVY_BORDER, ShownBorders.ALL);
-        for (int i = 0; i < 5; i++) {
-            table.setColumnWidth(i, 20, 20);
-        }
-        // header table
-        table.addCell("Id");
-        table.addCell("Student Name");
-        table.addCell("Date Of Birth");
-        table.addCell("Classroom");
-        table.addCell("Subject");
+        System.out.print(">>> Enter Name: ");
+        String name = sc.nextLine();
+
+        List<Student> searchRecords = new ArrayList<>();
 
         for (Student student : students) {
             if (student.getName().equalsIgnoreCase(name)) {
-                if(!found) {
+                if (!found) {
                     found = true;
                 }
-                // date rows
-                table.addCell(student.getId());
-                table.addCell(student.getName());
-                table.addCell(student.getDateOfBirth());
-                table.addCell(student.getClassroom());
-                table.addCell(student.getSubject());
+                searchRecords.add(student);
             }
         }
-        System.out.println(table.render());
         if (!found) {
-            System.out.println("Student's name: " + name + " was not found!");
+            System.out.println("Student name: " + name + " was not found!");
+        } else {
+            int totalPages = (int)Math.ceil((double)searchRecords.size() / rowSize);
+            int totalRecords = searchRecords.size();
+            while (true) {
+                int startIndex = (currentPage - 1) * rowSize;
+                int endIndex = Math.min(startIndex + rowSize, searchRecords.size());
+                List<Student> pageStudents = searchRecords.subList(startIndex, endIndex);
+
+                System.out.println();
+                StudentTableModel.renderStudentsToTable(pageStudents, rowSize, currentPage, totalPages, totalRecords);
+                StudentTableModel.renderPagination();
+
+                System.out.print("Enter the option(pagination): ");
+                String pageOption = new Scanner(System.in).nextLine();
+                if (pageOption.equalsIgnoreCase("p")) {
+                    if (currentPage > 1) {
+                        currentPage--;
+                    } else {
+                        System.out.println("You're already on the first page.");
+                    }
+                } else if (pageOption.equalsIgnoreCase("n")){
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                    } else {
+                        System.out.println("You're already on the last page.");
+                    }
+                } else if (pageOption.equalsIgnoreCase("f")) {
+                    currentPage = 1;
+                } else if (pageOption.equalsIgnoreCase("l")) {
+                    currentPage = totalPages;
+                } else if (pageOption.equalsIgnoreCase("b")) {
+                    return;
+                } else {
+                    try {
+                        int pageNumber = Integer.parseInt(pageOption);
+                        if (pageNumber >= 1 && pageNumber <= totalPages) {
+                            currentPage = pageNumber;
+                        } else {
+                            System.out.println("Invalid page number. Please enter a number between 1 and " + totalPages);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input!");
+                    }
+                }
+            }
         }
     }
     public static void searchById() {
-        System.out.print("Enter Id: ");
+        System.out.print("Insert student's Id: ");
         String id = sc.nextLine();
+
         boolean found = false;
-        Table table = new Table(5, BorderStyle.UNICODE_BOX_HEAVY_BORDER, ShownBorders.ALL);
-        for (int i = 0; i < 5; i++) {
-            table.setColumnWidth(i, 20, 20);
-        }
-        // header table
-        table.addCell("Id");
-        table.addCell("Student Name");
-        table.addCell("Date Of Birth");
-        table.addCell("Classroom");
-        table.addCell("Subject");
+        List<Student> searchRecords = new ArrayList<>();
 
         for (Student student : students) {
-            if (student.getId().equals(id)) {
-                if(!found) {
+            if (student.getId().equalsIgnoreCase(id)) {
+                if (!found) {
                     found = true;
                 }
-                // date rows
-                table.addCell(student.getId());
-                table.addCell(student.getName());
-                table.addCell(student.getDateOfBirth());
-                table.addCell(student.getClassroom());
-                table.addCell(student.getSubject());
+                searchRecords.add(student);
             }
         }
-        System.out.println(table.render());
         if (!found) {
-            System.out.println("Student's name: " + id + " was not found!");
+            System.out.println("Student Id: " + id + " was not found!");
+        } else {
+            int totalPages = (int)Math.ceil((double)searchRecords.size() / rowSize);
+            int totalRecords = searchRecords.size();
+            while (true) {
+                int startIndex = (currentPage - 1) * rowSize;
+                int endIndex = Math.min(startIndex + rowSize, searchRecords.size());
+                List<Student> pageStudents = searchRecords.subList(startIndex, endIndex);
+
+                System.out.println();
+                StudentTableModel.renderStudentsToTable(pageStudents, rowSize, currentPage, totalPages, totalRecords);
+                StudentTableModel.renderPagination();
+
+                System.out.print("Enter the option(pagination): ");
+                String pageOption = new Scanner(System.in).nextLine();
+                if (pageOption.equalsIgnoreCase("p")) {
+                    if (currentPage > 1) {
+                        currentPage--;
+                    } else {
+                        System.out.println("You're already on the first page.");
+                    }
+                } else if (pageOption.equalsIgnoreCase("n")){
+                    if (currentPage < totalPages) {
+                        currentPage++;
+                    } else {
+                        System.out.println("You're already on the last page.");
+                    }
+                } else if (pageOption.equalsIgnoreCase("f")) {
+                    currentPage = 1;
+                } else if (pageOption.equalsIgnoreCase("l")) {
+                    currentPage = totalPages;
+                } else if (pageOption.equalsIgnoreCase("b")) {
+                    return;
+                } else {
+                    try {
+                        int pageNumber = Integer.parseInt(pageOption);
+                        if (pageNumber >= 1 && pageNumber <= totalPages) {
+                            currentPage = pageNumber;
+                        } else {
+                            System.out.println("Invalid page number. Please enter a number between 1 and " + totalPages);
+                        }
+                    } catch (NumberFormatException e) {
+                        System.out.println("Invalid input!");
+                    }
+                }
+            }
         }
     }
 
@@ -199,67 +263,67 @@ public class StudentService {
 
         if (student == null) {
             System.out.println("Student " + id + " was not found.");
-        }
-        Table table = new Table(5, BorderStyle.UNICODE_BOX_HEAVY_BORDER, ShownBorders.ALL);
-        for (int i = 0; i < 5; i++) {
-            table.setColumnWidth(i, 20, 20);
-        }
-        // header table
-        table.addCell("Id");
-        table.addCell("Student Name");
-        table.addCell("Date Of Birth");
-        table.addCell("Classroom");
-        table.addCell("Subject");
+        } else {
+            Table table = new Table(5, BorderStyle.UNICODE_BOX_HEAVY_BORDER, ShownBorders.ALL);
+            for (int i = 0; i < 5; i++) {
+                table.setColumnWidth(i, 20, 20);
+            }
+            // header table
+            table.addCell("Id");
+            table.addCell("Student Name");
+            table.addCell("Date Of Birth");
+            table.addCell("Classroom");
+            table.addCell("Subject");
 
-        for (Student s : students) {
-            if (s.getId().equals(id)) {
-                System.out.println("---------------------------------------");
-                System.out.println("[*] Update student's information");
-                System.out.println("---------------------------------------");
-                System.out.println("1. Update student's name");
-                System.out.println("2. Update student's date of birth");
-                System.out.println("3. Update student's classroom");
-                System.out.println("4. Update student's subject");
-                System.out.println(">>Input b to Back to menu");
-                System.out.println("---------------------------------------");
-                System.out.print("Enter the option(edit): ");
-                String option = sc.nextLine();
-                try {
-                    switch (option) {
-                        case "1" -> {
-                            System.out.print("[+] Insert new student's name: ");
-                            String name = sc.nextLine();
-                            s.setName(name);
-                            StudentIO.saveAll();
+            for (Student s : students) {
+                if (s.getId().equals(id)) {
+                    System.out.println("---------------------------------------");
+                    System.out.println("[*] Update student's information");
+                    System.out.println("---------------------------------------");
+                    System.out.println("1. Update student's name");
+                    System.out.println("2. Update student's date of birth");
+                    System.out.println("3. Update student's classroom");
+                    System.out.println("4. Update student's subject");
+                    System.out.println(">>Input b to Back to menu");
+                    System.out.println("---------------------------------------");
+                    System.out.print("Enter the option(edit): ");
+                    String option = sc.nextLine();
+                    try {
+                        switch (option) {
+                            case "1" -> {
+                                System.out.print("[+] Insert new student's name: ");
+                                String name = sc.nextLine();
+                                s.setName(name);
+                                StudentIO.saveAll();
+                            }
+                            case "2" -> {
+                                System.out.print("[+] Insert new student's dob(yyyy-mm-dd): ");
+                                String dob = sc.nextLine();
+                                s.setDateOfBirth(dob);
+                                StudentIO.saveAll();
+                            }
+                            case "3" -> {
+                                System.out.print("[+] Insert new student's classroom: ");
+                                String classroom = sc.nextLine();
+                                s.setClassroom(classroom);
+                                StudentIO.saveAll();
+                            }
+                            case "4" -> {
+                                System.out.print("[+] Insert new student's subject: ");
+                                String subject = sc.nextLine();
+                                s.setSubject(subject);
+                                StudentIO.saveAll();
+                            }
+                            case "b" -> {
+                                return;
+                            }
+                            default -> System.out.println("Invalid input!");
                         }
-                        case "2" -> {
-                            System.out.print("[+] Insert new student's dob(yyyy-mm-dd): ");
-                            String dob = sc.nextLine();
-                            s.setDateOfBirth(dob);
-                            StudentIO.saveAll();
-                        }
-                        case "3" -> {
-                            System.out.print("[+] Insert new student's classroom: ");
-                            String classroom = sc.nextLine();
-                            s.setClassroom(classroom);
-                            StudentIO.saveAll();
-                        }
-                        case "4" -> {
-                            System.out.print("[+] Insert new student's subject: ");
-                            String subject = sc.nextLine();
-                            s.setSubject(subject);
-                            StudentIO.saveAll();
-                        }
-                        case "b" -> {
-                            return;
-                        }
-                        default -> System.out.println("Invalid input!");
+
+                    } catch (Exception e) {
+                        System.out.println("Error! found!");
                     }
-
-                } catch (Exception e) {
-                    System.out.println("Error! found!");
                 }
-
             }
         }
     }
