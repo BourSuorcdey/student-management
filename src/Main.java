@@ -22,8 +22,9 @@ public class Main {
         Utils.checkingCommit(input, transaction, dataSource);
 
         // reading data from file into list
-        students = Utils.readFileToList(dataSource);
-        listToFile(students, transaction);
+        //students =
+        Utils.readFileToList(dataSource);
+        //listToFile(students, transaction);
 
         // read data from data source into transaction file
         boolean running = true;
