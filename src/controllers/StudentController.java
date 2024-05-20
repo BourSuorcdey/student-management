@@ -40,7 +40,7 @@ public class StudentController {
                     StudentService.deleteData();
                     break;
                 case "7":
-                    StudentService.generateDataIntoFile(transaction);
+                    StudentService.generateDataIntoFile();
                     break;
                 case "8":
                     StudentService.deleteAllDataFromFile(dataSource);

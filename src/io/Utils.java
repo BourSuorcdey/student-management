@@ -9,9 +9,14 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.TimeUnit;
+
 import static services.StudentService.random;
 
 public class Utils {
+    private static final int NUM_THREADS = 100;
     private static StudentController studentController;
     private static View studentView;
     private static final int BUFFER_SIZE = 64 * 1024; // 64KB
@@ -80,7 +85,7 @@ public class Utils {
     // it synchronizes
     public static void listToFile(List<Student> students, String transaction) {
 
-        long start = System.currentTimeMillis();
+        /**long start = System.currentTimeMillis();
 
         // Use BufferedWriter with a specified buffer size for more efficient buffering
         try (BufferedWriter writer = new BufferedWriter(new FileWriter(transaction), BUFFER_SIZE)) {
@@ -96,8 +101,9 @@ public class Utils {
         long duration = end - start;
         System.out.println("Writing duration: " + duration + " ms");
         System.out.println();
+         **/
 
-        /**long start = System.currentTimeMillis();
+        long start = System.currentTimeMillis();
 
         ExecutorService executor = Executors.newFixedThreadPool(NUM_THREADS);
         int partitionSize = (students.size() + NUM_THREADS - 1) / NUM_THREADS; // Round up division
@@ -134,8 +140,6 @@ public class Utils {
         long duration = end - start;
         System.out.println("Writing duration: " + duration + " ms");
         System.out.println();
-
-         **/
 
     }
 
@@ -179,17 +183,17 @@ public class Utils {
     }
 
     // Generate student
-    public static List<Student> generateMockStudents(int count) {
-        List<Student> students = new ArrayList<>();
-        for (int i = 0; i < count; i++) {
-            Student student = new Student();
-            student.setId(String.valueOf(random.nextInt(100000)));
-            student.setName("Student" + (i + 1));
-            student.setDateOfBirth(LocalDate.of(2000 + random.nextInt(20), 1 + random.nextInt(12), 1 + random.nextInt(28)).toString());
-            student.setClassroom("E" + (1 + random.nextInt(10)));
-            student.setSubject("Java" + (1 + random.nextInt(5)));
-            students.add(student);
-        }
-        return students;
-    }
+//    public static List<Student> generateMockStudents(int count) {
+//        List<Student> studentsGenerate = new ArrayList<>();
+//        for (int i = 0; i < count; i++) {
+//            Student student = new Student();
+//            student.setId(String.valueOf(random.nextInt(100000)));
+//            student.setName("Student" + (i + 1));
+//            student.setDateOfBirth(LocalDate.of(2000 + random.nextInt(20), 1 + random.nextInt(12), 1 + random.nextInt(28)).toString());
+//            student.setClassroom("E" + (1 + random.nextInt(10)));
+//            student.setSubject("Java" + (1 + random.nextInt(5)));
+//            studentsGenerate.add(student);
+//        }
+//        return studentsGenerate;
+//    }
 }
