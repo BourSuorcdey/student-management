@@ -45,7 +45,6 @@ public class StudentIO {
 
                     line = in.readLine();
                 }
-
             } catch (IOException e) {
                 System.out.println(e);
                 return null;

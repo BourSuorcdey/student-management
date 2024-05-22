@@ -48,7 +48,7 @@ public class StudentController {
                     System.exit(1);
                     break;
                 default:
-                    System.out.println("Bye!");
+                    System.out.println("Invalid Input!");
             }
         }
     }
